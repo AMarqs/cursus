@@ -1,0 +1,7 @@
+Normas:
+1. Usar Debian o Rocky (preferiblemente Debian)
+2. Al inciar debe ejecutarse AppArmor (en Debian) o SELinux (en Rocky)
+3. Crear al menos 2 particiones cifradas usando LVM
+4. Teoria: Diferencias entre aptitude y aptitude
+5. Teoria: Que son SELinux y AppArmor?
+6. El servicio SSH se ejecutara solo en el puerto 4242 (no debe ser posible conectarte a traves de SSH como root)

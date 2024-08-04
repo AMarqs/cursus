@@ -1,0 +1,15 @@
+crear carpeta con mi login en sgoinfree
+> cd /sgoinfre/goinfre
+> mkdir albmarqu
+> chmod 700 albmarqu
+> cd albmarqu
+> mkdir born2beroot
+
+Creo la maquina virtual con los ajustes por defecto, le pongo de memoria 30.8GB (por lo que pone en el bonus)
+Guardo la maquina temporalmente a nivel local, para hacer las particiones mas rapido (luego la pasare al servidor)
+
+Descargo Debian (12.5)
+
+Continua en:
+
+https://github.com/gemartin99/Born2beroot-Tutorial?tab=readme-ov-file#4-configuraci%C3%B3n-de-la-m%C3%A1quina-virtual-%EF%B8%8F

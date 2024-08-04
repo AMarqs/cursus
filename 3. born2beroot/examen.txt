@@ -1,0 +1,49 @@
+1. PRELIMINARES
+
+1.1. Tests preliminares:
+	- Clonar el repositorio
+	- Comprobar que el nombre está bien (signature.txt)
+
+------------------------------------------------------------------
+2. INSTRUCCIONES GENERALES
+
+2.1. Instrucciones generales:
+	- Comprobar que signature.txt está en el root
+	- Comprobar que signature.txt es igual que el .vdi
+		diff
+	- Inicia la máquina virtual
+
+------------------------------------------------------------------
+3. PARTE OBLIGATORIA
+
+3.1. Visión general del proyecto:
+	- Explicaciones de teoría
+
+3.2. Configuración simple:
+	- Comprueba que la máquinavirtual no tiene lanzado una interfaz gráfica
+	- El alumno pone la contraseña de encriptado y la de usuario, comprobar que la contraseña cumple los requisitos
+	- Comprueba que el servicio UFW  está iniciado
+	- Comprueba que el servicio SSH  está iniciado
+	- Comprueba que el sistema operativo el Debian o Rocky
+
+3.3. Usuario:
+	- Comprueba que el usuario del login está añadido en los grupos 'sudo' y 'user42'
+	- Crea un nuevo usuario y ponle contraseña, el alumno tiene que explicar donde pone los requisitos de contraseña (deben haber 1 o 2 archivos modificados)
+	- El alumno tiene que crear un grupo llamado 'evaluating' y añadir el usuario a este
+	- Explicación del alumno de las ventajas de esta política de privacidad
+
+3.4. Hostname y particiones
+	- Comprueba el nombre del hostname: login42
+	- Modifica el hostname y reinicia la máquina, comprueba que el nombre se ha cambiado correctamente
+	- El alumno tiene que explicar cómo ver las particiones
+	- Compara la salida con la del subject
+	- El alumno tiene que explicar cómo funciona LVM
+
+3.5. sudo
+	- Comprueba que sudo está bien instalado
+	- El alumno tiene que explicar cómo añadir el nuevo usuario a grupo 'sudo'
+	- 
+
+------------------------------------------------------------------
+4. BONUS
+
