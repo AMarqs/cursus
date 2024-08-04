@@ -1,47 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 21:31:43 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/08/04 22:35:05 by albmarqu         ###   ########.fr       */
+/*   Created: 2024/01/31 13:08:00 by albmarqu          #+#    #+#             */
+/*   Updated: 2024/01/31 19:39:35 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "libft.h"
 
-void	bin2str(int sig)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	static char	c;
-	static int	i;
-	int			bin;
+	t_list	*new;
+	t_list	*node;
+	void	*aux;
 
-	if (sig == SIGUSR1)
-		bin = 0x00;
-	else
-		bin = 0x01;
-	c = c | (bin << i);
-	i++;
-	if (i == 8)
+	if (!lst || !f || !del)
+		return (NULL);
+	new = NULL;
+	while (lst)
 	{
-		ft_printf("%c", c);
-		c = 0;
-		i = 0;
+		aux = f(lst->content);
+		node = ft_lstnew(aux);
+		if (node == NULL)
+		{
+			del (aux);
+			ft_lstclear(&new, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new, node);
+		lst = lst->next;
 	}
-}
-
-int	main(void)
-{
-	int	pid;
-
-	pid = getpid();
-	ft_printf("Server PID: %d\n", pid);
-	while (1)
-	{
-		signal(SIGUSR1, bin2str);
-		signal(SIGUSR2, bin2str);
-	}
-	return (0);
+	return (new);
 }

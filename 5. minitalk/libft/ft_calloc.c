@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 19:51:09 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/08/04 21:22:06 by albmarqu         ###   ########.fr       */
+/*   Created: 2024/01/22 17:49:01 by albmarqu          #+#    #+#             */
+/*   Updated: 2024/02/05 17:22:56 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <signal.h>
-# include "./libft/libft.h"
-# include "./printf/ft_printf.h"
+void	*ft_calloc(size_t count, size_t size)
+{
+	char	*dst;
+	int		i;
 
-#endif
+	i = count * size;
+	dst = (char *)malloc(i);
+	if (dst == NULL)
+		return (NULL);
+	while ((i - 1) >= 0)
+	{
+		dst[i - 1] = 0;
+		i--;
+	}
+	return (dst);
+}

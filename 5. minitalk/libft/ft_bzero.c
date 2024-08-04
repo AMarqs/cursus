@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 19:51:09 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/08/04 21:22:06 by albmarqu         ###   ########.fr       */
+/*   Created: 2024/01/17 20:00:47 by albmarqu          #+#    #+#             */
+/*   Updated: 2024/01/18 19:25:53 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <signal.h>
-# include "./libft/libft.h"
-# include "./printf/ft_printf.h"
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*s1;
 
-#endif
+	s1 = (unsigned char *)s;
+	while (n > 0)
+	{
+		s1[n - 1] = 0;
+		n--;
+	}
+}

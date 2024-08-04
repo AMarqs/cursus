@@ -1,47 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 21:31:43 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/08/04 22:35:05 by albmarqu         ###   ########.fr       */
+/*   Created: 2024/01/22 18:29:38 by albmarqu          #+#    #+#             */
+/*   Updated: 2024/02/05 18:20:35 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "libft.h"
 
-void	bin2str(int sig)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	static char	c;
-	static int	i;
-	int			bin;
+	char	*ss;
+	int		i;
 
-	if (sig == SIGUSR1)
-		bin = 0x00;
-	else
-		bin = 0x01;
-	c = c | (bin << i);
-	i++;
-	if (i == 8)
+	i = 0;
+	if ((start + len) > ft_strlen(s))
+		len = ft_strlen(s) - start;
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	ss = (char *)malloc((len + 1) * sizeof(char));
+	if (ss == NULL)
+		return (NULL);
+	while (s[start + i] && len > 0)
 	{
-		ft_printf("%c", c);
-		c = 0;
-		i = 0;
+		ss[i] = s[start + i];
+		len--;
+		i++;
 	}
-}
-
-int	main(void)
-{
-	int	pid;
-
-	pid = getpid();
-	ft_printf("Server PID: %d\n", pid);
-	while (1)
-	{
-		signal(SIGUSR1, bin2str);
-		signal(SIGUSR2, bin2str);
-	}
-	return (0);
+	ss[i] = '\0';
+	return (ss);
 }

@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 19:51:09 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/08/04 21:22:06 by albmarqu         ###   ########.fr       */
+/*   Created: 2024/01/17 20:16:51 by albmarqu          #+#    #+#             */
+/*   Updated: 2024/01/18 19:36:52 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <signal.h>
-# include "./libft/libft.h"
-# include "./printf/ft_printf.h"
+void	*ft_memmove(void *dst, const void *src, size_t len)
+{
+	size_t			i;
+	unsigned char	*dst1;
+	unsigned char	*src1;
 
-#endif
+	i = 0;
+	dst1 = (unsigned char *)dst;
+	src1 = (unsigned char *)src;
+	if (dst == NULL && src == NULL)
+		return (dst);
+	if (dst1 > src1)
+	{
+		while (len-- > 0)
+			dst1[len] = src1[len];
+	}
+	else
+	{
+		while (i++ < len)
+			dst1[i - 1] = src1[i - 1];
+	}
+	return (dst);
+}

@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 19:51:09 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/08/04 21:22:06 by albmarqu         ###   ########.fr       */
+/*   Created: 2024/01/30 17:26:54 by albmarqu          #+#    #+#             */
+/*   Updated: 2024/01/30 17:32:34 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <signal.h>
-# include "./libft/libft.h"
-# include "./printf/ft_printf.h"
-
-#endif
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else
+	{
+		if (n < 0)
+		{
+			n = -n;
+			write(fd, "-", 1);
+		}
+		if (n >= 10)
+			ft_putnbr_fd((n / 10), fd);
+		n = (n % 10) + '0';
+		write (fd, &n, 1);
+	}
+}

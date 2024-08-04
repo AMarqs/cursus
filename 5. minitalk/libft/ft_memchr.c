@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/17 19:51:09 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/08/04 21:22:06 by albmarqu         ###   ########.fr       */
+/*   Created: 2024/01/18 20:04:42 by albmarqu          #+#    #+#             */
+/*   Updated: 2024/02/05 17:03:25 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <signal.h>
-# include "./libft/libft.h"
-# include "./printf/ft_printf.h"
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	unsigned char	*s1;
+	unsigned char	c1;
 
-#endif
+	s1 = (unsigned char *)s;
+	c1 = (unsigned char)c;
+	while (n > 0)
+	{
+		if (*s1 == c1)
+			return (s1);
+		s1++;
+		n--;
+	}
+	return (NULL);
+}

@@ -6,30 +6,48 @@
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 21:31:48 by albmarqu          #+#    #+#              #
-#    Updated: 2024/08/04 14:16:53 by albmarqu         ###   ########.fr        #
+#    Updated: 2024/08/04 21:29:33 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk.a
+NAME_C = client
+FILES_C = client.c
+OBJECTS_C = $(FILES_C:.c=.o)
 
-FILES = client.c \
-		server.c
+NAME_S = server
+FILES_S = server.c
+OBJECTS_S = $(FILES_S:.c=.o)
+
+PRINTF = ./printf
+LIBFT = ./libft
+
+
+%.o: %.c minitalk.h
+	@gcc -Wall -Werror -Wextra -I. -c $< -o $@
+
+all: $(NAME_C) $(NAME_S)
+
+printf:
+	@make re -C $(PRINTF)
+
+libft:
+	@make re -C $(LIBFT)
 	
-OBJECTS = $(FILES:.c=.o)
+$(NAME_C): $(OBJECTS_C) printf libft
+	@gcc $(OBJECTS_C) -o $(NAME_C) -L$(PRINTF) -lftprintf -L$(LIBFT) -lft
 
-all: $(NAME)
+$(NAME_S): $(OBJECTS_S) printf libft
+	@gcc $(OBJECTS_S) -o $(NAME_S) -L$(PRINTF) -lftprintf -L$(LIBFT) -lft
 
-$(NAME): $(OBJECTS)
-	ar rcs $(NAME) $(OBJECTS)
-$(OBJECTS): $(FILES)
-	gcc -Wall -Werror -Wextra -I. -c $(FILES)
 
 clean:
-	rm -f $(OBJECTS)
+	@make fclean -C $(PRINTF) 
+	@make fclean -C $(LIBFT)
+	@rm -f $(OBJECTS_C) $(OBJECTS_S)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME_C) $(NAME_S)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean printf libft fclean re

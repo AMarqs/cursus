@@ -1,47 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/11 21:31:43 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/08/04 22:35:05 by albmarqu         ###   ########.fr       */
+/*   Created: 2024/01/22 13:54:31 by albmarqu          #+#    #+#             */
+/*   Updated: 2024/02/05 17:53:59 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "libft.h"
 
-void	bin2str(int sig)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	static char	c;
-	static int	i;
-	int			bin;
+	size_t	i;
+	size_t	j;
+	char	*h;
 
-	if (sig == SIGUSR1)
-		bin = 0x00;
-	else
-		bin = 0x01;
-	c = c | (bin << i);
-	i++;
-	if (i == 8)
+	i = 0;
+	h = (char *)haystack;
+	if (*needle == '\0')
+		return (h);
+	while (haystack[i] && i < len)
 	{
-		ft_printf("%c", c);
-		c = 0;
-		i = 0;
+		j = 0;
+		while ((haystack[i] == needle[j]) && needle[j] && i < len)
+		{
+			i++;
+			j++;
+		}
+		if (needle[j] == '\0')
+			return (h + (i - j));
+		i = i - j;
+		i++;
 	}
-}
-
-int	main(void)
-{
-	int	pid;
-
-	pid = getpid();
-	ft_printf("Server PID: %d\n", pid);
-	while (1)
-	{
-		signal(SIGUSR1, bin2str);
-		signal(SIGUSR2, bin2str);
-	}
-	return (0);
+	return (NULL);
 }

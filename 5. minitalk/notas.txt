@@ -1,0 +1,11 @@
+- Tengo que meter el libft? Cómo se compila?
+
+- Qué es relink? Cómo se evita?
+
+- 
+
+
+
+Cliente
+
+- El PID viene dado como argumento en string y tengo que pasarlo a numero, porque la funcion kill lo tiene que recibir en formato numero
