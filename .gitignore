@@ -18,9 +18,12 @@
 *.lib
 *.a
 
-# Executables
+# EXECUTABLES
 *.exe
 *.out
+# minitalk
+client
+server
 
 # Compile Results
 *.cmd
