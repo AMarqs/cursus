@@ -5,49 +5,45 @@
 #                                                     +:+ +:+         +:+      #
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/07/11 21:31:48 by albmarqu          #+#    #+#              #
-#    Updated: 2024/08/08 21:53:33 by albmarqu         ###   ########.fr        #
+#    Created: 2024/08/08 22:39:41 by albmarqu          #+#    #+#              #
+#    Updated: 2024/08/08 22:47:27 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_C = client
-FILES_C = client.c
-OBJECTS_C = $(FILES_C:.c=.o)
-
-NAME_S = server
-FILES_S = server.c
-OBJECTS_S = $(FILES_S:.c=.o)
-
-PRINTF = ./printf
+NAME = so_long
+LIBMLX = ./MLX42
 LIBFT = ./libft
 
+HEADERS = -I $(LIBMLX) -I $(LIBFT)
+LIBRARIES = $(LIBMLX)/libmlx.a $(LIBFT)/libft.a
+GLFW = -lglfw
+SRCS = so_long.c
+OBJS = $(SRC:.c=.o)
+FLAGS = -Wall -Wextra -Werror -Ofast
+CC = gcc
 
-%.o: %.c minitalk.h
-	@gcc -Wall -Werror -Wextra -I. -c $< -o $@
+all: $(NAME)
 
-all: $(NAME_C) $(NAME_S)
+$(NAME): $(OBJS) libft libmlx
+	@$(CC) $(OBJS) $(LIBS) $(GLFW) $(HEADERS) -o $(NAME)
 
-printf:
-	@make -C $(PRINTF)
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $< \n)"
+
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 libft:
 	@make -C $(LIBFT)
-	
-$(NAME_C): $(OBJECTS_C) printf libft
-	@gcc $(OBJECTS_C) -o $(NAME_C) -L$(PRINTF) -lftprintf -L$(LIBFT) -lft
-
-$(NAME_S): $(OBJECTS_S) printf libft
-	@gcc $(OBJECTS_S) -o $(NAME_S) -L$(PRINTF) -lftprintf -L$(LIBFT) -lft
-
 
 clean:
-	@make fclean -C $(PRINTF) 
+	@rm -rf $(OBJS)
+	@rm -rf $(LIBMLX)/build
 	@make fclean -C $(LIBFT)
-	@rm -f $(OBJECTS_C) $(OBJECTS_S)
 
 fclean: clean
-	@rm -f $(NAME_C) $(NAME_S)
+	@rm -rf $(NAME)
 
 re: fclean all
 
-.PHONY: all clean printf libft fclean re
+.PHONY: all clean fclean re libmlx libft

@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 21:31:46 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/08/05 18:57:02 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/08/08 19:14:06 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	handle_signal(int signal, siginfo_t *info, void *context)
 	pid = info->si_pid;
 	if (signal == SIGUSR1)
 	{
-		ft_printf("Signal received: 0\n");
 		bit = str2bin(NULL);
 		kill(pid, bit);
 	}

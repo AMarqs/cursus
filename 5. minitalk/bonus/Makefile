@@ -6,7 +6,7 @@
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 21:31:48 by albmarqu          #+#    #+#              #
-#    Updated: 2024/08/04 21:29:33 by albmarqu         ###   ########.fr        #
+#    Updated: 2024/08/08 21:53:09 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,10 @@ LIBFT = ./libft
 all: $(NAME_C) $(NAME_S)
 
 printf:
-	@make re -C $(PRINTF)
+	@make -C $(PRINTF)
 
 libft:
-	@make re -C $(LIBFT)
+	@make -C $(LIBFT)
 	
 $(NAME_C): $(OBJECTS_C) printf libft
 	@gcc $(OBJECTS_C) -o $(NAME_C) -L$(PRINTF) -lftprintf -L$(LIBFT) -lft
