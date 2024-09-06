@@ -6,7 +6,7 @@
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 22:39:41 by albmarqu          #+#    #+#              #
-#    Updated: 2024/09/06 14:26:20 by albmarqu         ###   ########.fr        #
+#    Updated: 2024/09/06 18:39:21 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS = 	so_long.c \
 		get_next_line_bonus.c \
 		get_next_line_utils_bonus.c
 OBJS = $(SRCS:.c=.o)
-FLAGS = -Wall -Wextra -Werror -Ofast
+FLAGS = -Wall -Wextra -Werror -g # Añadir la bandera -g para la depuración -Ofast
 CC = gcc
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:41:53 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/06 14:23:37 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/06 19:27:54 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ bool	characters(char **map, int row, int col)
 	int	c;
 
 	i = 0;
-	j = 0;
 	p = 0;
 	e = 0;
 	c = 0;
 	while (i < row)
 	{
+		j = 0;
 		while (j < col)
 		{
 			if (map[i][j] == 'P')
@@ -56,7 +56,7 @@ bool	characters(char **map, int row, int col)
 				e++;
 			else if (map[i][j] == 'C')
 				c++;
-			else if (map[i][j] != '1' && map[i][j] != '0')
+			else if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != '\n')
 				return (false);
 			j++;
 		}
@@ -64,6 +64,8 @@ bool	characters(char **map, int row, int col)
 	}
 	if (p == 1 && e == 1 && c >= 1)
 		return (true);
+	// posible mejora: poner una funcion con cada tipo de fallo de p, e y c
+	ft_printf("p: %d, e: %d, c: %d\n", p, e, c);
 	return (false);
 }
 
@@ -90,10 +92,10 @@ bool	path(char **map, int row, int col)
 	x = -1;
 	y = -1;
 	i = 0;
-	j = 0;
 	c = 0;
 	while (i < row)
 	{
+		j = 0;
 		while (j < col)
 		{
 			if (map[i][j] == 'P')
@@ -116,13 +118,18 @@ bool	path(char **map, int row, int col)
 		map_copy[i] = ft_strdup(map[i]);
 		i++;
 	}
+	map_copy[row] = NULL;
 	floodfill(map_copy, x, y);
+	i = 0;
 	while (i < row)
 	{
+		j = 0;
 		while (j < col)
 		{
-			if (map[i][j] == 'C' && map_copy[i][j] == 'E')
+			if (map_copy[i][j] == 'C' || map_copy[i][j] == 'E')
 			{
+				while (row >= 0)
+					free(map_copy[row--]);
 				free(map_copy);
 				return (false);
 			}
@@ -130,6 +137,9 @@ bool	path(char **map, int row, int col)
 		}
 		i++;
 	}
+	while (row >= 0)
+		free(map_copy[row--]);
+	free(map_copy);
 	return (true);
 }
 
