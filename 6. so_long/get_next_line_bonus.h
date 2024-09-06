@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 22:51:12 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/06 14:19:58 by albmarqu         ###   ########.fr       */
+/*   Created: 2024/03/08 17:33:56 by albmarqu          #+#    #+#             */
+/*   Updated: 2024/04/19 21:32:11 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <fcntl.h>
-# include <unistd.h>
 # include <sys/types.h>
 # include <sys/uio.h>
+# include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h> ///
-# include <math.h>
-# include <stdint.h>
 # include <limits.h>
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
-# include "get_next_line_bonus.h"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 4096
+# endif
 
 char	*get_next_line(int fd);
-bool	border(char **map, int row, int col);
-bool	characters(char **map, int row, int col);
-bool	path(char **map, int row, int col);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s1);
 
 #endif

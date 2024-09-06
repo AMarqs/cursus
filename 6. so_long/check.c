@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:41:53 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/04 22:15:50 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:23:37 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,17 @@ bool	characters(char **map, int row, int col)
 	return (false);
 }
 
+void	floodfill(char **map, int x, int y)
+{
+	if (map[x][y] == '1' || map[x][y] == 'V')
+		return ;
+	map[x][y] = 'V';
+	floodfill(map, x + 1, y);
+	floodfill(map, x - 1, y);
+	floodfill(map, x, y + 1);
+	floodfill(map, x, y - 1);
+}
+
 bool	path(char **map, int row, int col)
 {
 	int	x;
@@ -74,6 +85,7 @@ bool	path(char **map, int row, int col)
 	int	i;
 	int	j;
 	int	c;
+	char **map_copy;
 
 	x = -1;
 	y = -1;
@@ -97,25 +109,27 @@ bool	path(char **map, int row, int col)
 	}
 	if (x == -1 || y == -1)
 		return (false);
-	floodfill(map, x, y, row, col, &foundE, &foundC);
+	map_copy = malloc((row + 1) * sizeof(char *));
+	i = 0;
+	while (i < row)
+	{
+		map_copy[i] = ft_strdup(map[i]);
+		i++;
+	}
+	floodfill(map_copy, x, y);
+	while (i < row)
+	{
+		while (j < col)
+		{
+			if (map[i][j] == 'C' && map_copy[i][j] == 'E')
+			{
+				free(map_copy);
+				return (false);
+			}
+			j++;
+		}
+		i++;
+	}
 	return (true);
 }
-// NO ENTIENDO UN CIPOTE
 
-void floodfill(char **map, int x, int y, int rows,
-	int cols, bool *foundE, int *foundC)
-{
-	if (x < 0 || x >= rows || y < 0 || y >= cols
-		|| map[x][y] == '1' || map[x][y] == 'V')
-		return ;
-	if (map[x][y] == 'E')
-		*foundE = true;
-	if (map[x][y] == 'C')
-		(*foundC)++;
-    map[x][y] = 'V';     // Mark the cell as visited
-    // Recursively visit all adjacent cells
-    floodfill(map, x + 1, y, rows, cols, foundE, foundC);
-    floodfill(map, x - 1, y, rows, cols, foundE, foundC);
-    floodfill(map, x, y + 1, rows, cols, foundE, foundC);
-    floodfill(map, x, y - 1, rows, cols, foundE, foundC);
-}
