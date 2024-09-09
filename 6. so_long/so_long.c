@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 22:53:11 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/06 22:07:52 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/09 21:24:09 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ int	ft_strlen2(const char *s)
 int	main(int argc, char **argv)
 {
 	int		file;
-	int		row;
-	int		col;
-	char	**map;
+	t_map	*map;
 	char	*line;
+	mlx_t	*mlx;
 
-	row = 0;
 	if (argc != 2)
 	{
 		write(2, "Error\nMore than 1 argument\n", 27);
@@ -48,115 +46,96 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	line = get_next_line(file);
-	while (line)
-	{
-		free(line);
-		line = get_next_line(file);
-		row++;
-	}
-	close(file);
-	file = open(argv[1], O_RDONLY);
-	map = malloc((row + 1) * sizeof(char *));
+	map = malloc(sizeof(t_map));
 	if (map == NULL)
 	{
 		write(2, "Error\nError allocating memory\n", 30);
 		exit(EXIT_FAILURE);
 	}
-	line = get_next_line(file);
-	col = ft_strlen2(line);
-	row = 0;
+	map->row = 0;
 	while (line)
 	{
-		map[row] = line;
-		if (ft_strlen2(map[row]) != col)
+		free(line);
+		line = get_next_line(file);
+		map->row++;
+	}
+	close(file);
+	file = open(argv[1], O_RDONLY);
+	map->map = malloc((map->row + 1) * sizeof(char *));
+	if (map->map == NULL)
+	{
+		write(2, "Error\nError allocating memory\n", 30);
+		free(map);
+		exit(EXIT_FAILURE);
+	}
+	line = get_next_line(file);
+	map->col = ft_strlen2(line);
+	map->row = 0;
+	while (line)
+	{
+		map->map[map->row] = line;
+		if (ft_strlen2(map->map[map->row]) != map->col)
 		{
-			while (row >= 0)
-				free(map[row--]);
+			while (map->row >= 0)
+				free(map->map[map->row--]);
+			free(map->map);
 			free(map);
 			write(2, "Error\nNo rectangular\n", 21);
 			close(file);
 			exit(EXIT_FAILURE);
 		}
 		line = get_next_line(file);
-		row++;
+		map->row++;
 	}
-	map[row] = NULL;
+	map->map[map->row] = NULL;
 	close(file);
-	if (!border(map, row, col))
+	if (!border(map->map, map->row, map->col))
 	{
 		write(2, "Error\nNot surrounded by walls\n", 30);
+		while (map->row >= 0)
+			free(map->map[map->row--]);
+		free(map->map);
+		free(map);
 		exit(EXIT_FAILURE);
 	}
-	else if (!characters(map, row, col))
+	else if (!check_characters(map))
 	{
 		write(2, "Error\nWrong characters\n", 23);
+		while (map->row >= 0)
+			free(map->map[map->row--]);
+		free(map->map);
+		free(map);
 		exit(EXIT_FAILURE);
 	}
-	else if (!path(map, row, col))
+	else if (!path(map->map, map->row, map->col))
 	{
 		write(2, "Error\nMap validation failed: no path\n", 37);
+		while (map->row >= 0)
+			free(map->map[map->row--]);
+		free(map->map);
+		free(map);
 		exit(EXIT_FAILURE);
 	}
-	while (row >= 0)
-		free(map[row--]);
-	free(map);
-
-
 	
-	
-	mlx_t			*mlx;
-	mlx_image_t		*image;
-	mlx_texture_t* 	texture;
-
-	mlx = mlx_init((1000), (1000), "so_long", false);
-	
-	//mlx = mlx_init((row * HEIGHT), (col * WIDTH), "so_long", false);
+	mlx = mlx_init((map->row * HEIGHT), (map->col * WIDTH), "so_long", false);
 	//if (!mlx)
     //    exit(EXIT_FAILURE);
-	
-	texture = mlx_load_png("./textures/sprites/tilesets/grass.png");
-	//if (!texture)
-    //    exit(EXIT_FAILURE);
-	
-	// Convert texture to a displayable image
-	
-	image = mlx_texture_to_image(mlx, texture);
-	//if (!image)
-    //    exit(EXIT_FAILURE);
-	
-	mlx_image_to_window(mlx, image, 0, 0);
-	mlx_image_to_window(mlx, image, 32, 32);
-	mlx_image_to_window(mlx, image, 64, 64);
 
-	// Display the image
-	// if (mlx_image_to_window(mlx, image, 0, 0) < 0)
-    //     exit(EXIT_FAILURE);
+	mapping(map, mlx);
 
 	mlx_loop(mlx);
-	while (1)
-		row++;
-	
-	
 	// Optional, terminate will clean up any leftovers, this is just to demonstrate.
 	//mlx_delete_image(mlx, img);
 	//mlx_delete_texture(texture);
 	//mlx_terminate(mlx);
 	
-	//return (EXIT_SUCCESS);
-
-
-	
+	while (map->row >= 0)
+		free(map->map[map->row--]);
+	free(map->map);
+	free(map);
 	return (0);
 }
 
-/*
-------- el mapa se introduce como un fichero .ber -----------
 
-YA - primera y ultima linea que sean unos 
-YA - primera y ultima columna que sean unos
-YA - solo un P y un E
-YA - como minimo un C
-YA - solo caracteres P, E, C, 1 y 0
-camino de 0 entre P y E, pasando por todos los C (floodfill)
-buscar sprits, mapas y texturas
-*/
+
+

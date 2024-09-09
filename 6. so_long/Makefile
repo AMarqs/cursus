@@ -6,7 +6,7 @@
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 22:39:41 by albmarqu          #+#    #+#              #
-#    Updated: 2024/09/06 18:39:21 by albmarqu         ###   ########.fr        #
+#    Updated: 2024/09/09 22:01:18 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ LIBRARIES = $(LIBMLX)/build/libmlx42.a $(LIBFT)/libft.a $(PRINTF)/libftprintf.a
 GLFW = -lglfw
 SRCS = 	so_long.c \
 		check.c \
+		floodfill.c \
+		map.c \
 		get_next_line_bonus.c \
 		get_next_line_utils_bonus.c
 OBJS = $(SRCS:.c=.o)
