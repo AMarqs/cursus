@@ -6,11 +6,21 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 21:15:18 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/09 21:18:05 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:48:41 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	free_image(t_image *image)
+{
+	mlx_delete_texture(image->t_floor);
+	mlx_delete_texture(image->t_wall);
+	mlx_delete_texture(image->t_char);
+	mlx_delete_texture(image->t_col);
+	mlx_delete_texture(image->t_exit);
+	free(image);
+}
 
 void 	mapping(t_map *map, mlx_t *mlx)
 {
@@ -54,4 +64,5 @@ void 	mapping(t_map *map, mlx_t *mlx)
 		}
 		i++;
 	}
+	free_image(image);
 }

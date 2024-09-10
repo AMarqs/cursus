@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 21:45:13 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/09 22:03:56 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:01:28 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	floodfill(char **map, int x, int y)
 	floodfill(map, x, y - 1);
 }
 
-void free_copy(char **map_copy, int row)
+void	free_copy(char **map_copy, int row)
 {
 	while (row >= 0)
 		free(map_copy[row--]);
@@ -61,14 +61,12 @@ bool	flood(t_map *map, int x, int y)
 
 bool	path(t_map *map)
 {
-	int	x;
-	int	y;
 	int	i;
 	int	j;
 	
 
-	x = 0;
-	y = 0;
+	map->x = 0;
+	map->y = 0;
 	i = -1;
 	while (++i < map->row)
 	{
@@ -77,12 +75,12 @@ bool	path(t_map *map)
 		{
 			if (map->map[i][j] == 'P')
 			{
-				x = i;
-				y = j;
+				map->x = i;
+				map->y = j;
 			}
 		}
 	}
-	if (!flood(map, x, y))
+	if (!flood(map, map->x, map->y))
 		return (false);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 22:53:11 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/09 21:24:09 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:32:13 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,64 @@ int	ft_strlen2(const char *s)
 	while (s[i] != '\0' && s[i] != '\n')
 		i++;
 	return (i);
+}
+
+void	free_map(t_map *map)
+{
+	while (map->row >= 0)
+		free(map->map[map->row--]);
+	free(map->map);
+	free(map);
+}
+
+void	f_close(void *param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	free_map(game->map);
+	mlx_terminate(game->mlx);
+	free(game);
+	exit(EXIT_SUCCESS);
+}
+
+void	move(t_game *game, int x, int y)
+{
+	if (game->map->map[game->map->x + x][game->map->y + y] == '1')
+		return ;
+	if (game->map->map[game->map->x + x][game->map->y + y] == 'E' && game->map->c != 0)
+		return ;
+	if (game->map->map[game->map->x + x][game->map->y + y] == 'E' && game->map->c == 0)
+	{
+		printf("You win!\n");
+		f_close(game);
+	}
+	if (game->map->map[game->map->x + x][game->map->y + y] == 'C')
+		game->map->c--;
+	game->map->map[game->map->x][game->map->y] = '0';
+	game->map->map[game->map->x + x][game->map->y + y] = 'P';
+	game->map->x += x;
+	game->map->y += y;
+	game->cont++;
+	ft_printf("Movements: %d\n", game->cont);
+	mapping(game->map, game->mlx);
+}
+
+void	f_key(mlx_key_data_t keydata, void* param)
+{
+	t_game	*game;
+
+	game = (t_game *)param;
+	if (keydata.key == MLX_KEY_ESCAPE)
+		f_close(game);
+	else if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+		move(game, 0, -1);
+	else if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+		move(game, -1, 0);
+	else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+		move(game, 0, 1);
+	else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
+		move(game, 1, 0);
 }
 
 int	main(int argc, char **argv)
@@ -76,10 +134,7 @@ int	main(int argc, char **argv)
 		map->map[map->row] = line;
 		if (ft_strlen2(map->map[map->row]) != map->col)
 		{
-			while (map->row >= 0)
-				free(map->map[map->row--]);
-			free(map->map);
-			free(map);
+			free_map(map);
 			write(2, "Error\nNo rectangular\n", 21);
 			close(file);
 			exit(EXIT_FAILURE);
@@ -92,36 +147,47 @@ int	main(int argc, char **argv)
 	if (!border(map->map, map->row, map->col))
 	{
 		write(2, "Error\nNot surrounded by walls\n", 30);
-		while (map->row >= 0)
-			free(map->map[map->row--]);
-		free(map->map);
-		free(map);
+		free_map(map);
 		exit(EXIT_FAILURE);
 	}
 	else if (!check_characters(map))
 	{
 		write(2, "Error\nWrong characters\n", 23);
-		while (map->row >= 0)
-			free(map->map[map->row--]);
-		free(map->map);
-		free(map);
+		free_map(map);
 		exit(EXIT_FAILURE);
 	}
-	else if (!path(map->map, map->row, map->col))
+	else if (!path(map))
 	{
 		write(2, "Error\nMap validation failed: no path\n", 37);
-		while (map->row >= 0)
-			free(map->map[map->row--]);
-		free(map->map);
-		free(map);
+		free_map(map);
 		exit(EXIT_FAILURE);
 	}
 	
 	mlx = mlx_init((map->row * HEIGHT), (map->col * WIDTH), "so_long", false);
-	//if (!mlx)
-    //    exit(EXIT_FAILURE);
+	if (!mlx)
+	{
+		write(2, "Error\nError initializing mlx\n", 30);
+		free_map(map);
+		exit(EXIT_FAILURE);
+	}
 
 	mapping(map, mlx);
+
+
+
+
+	t_game	*game;
+	game = malloc(sizeof(t_game));
+	game->map = map;
+	game->mlx = mlx;
+	game->cont = 0;
+	mlx_close_hook(mlx, f_close, game);
+	mlx_key_hook(mlx, f_key, game);
+
+
+
+
+
 
 	mlx_loop(mlx);
 	// Optional, terminate will clean up any leftovers, this is just to demonstrate.
@@ -129,10 +195,7 @@ int	main(int argc, char **argv)
 	//mlx_delete_texture(texture);
 	//mlx_terminate(mlx);
 	
-	while (map->row >= 0)
-		free(map->map[map->row--]);
-	free(map->map);
-	free(map);
+	free_map(map);
 	return (0);
 }
 

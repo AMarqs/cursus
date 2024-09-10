@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 22:51:12 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/09 22:04:31 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:29:33 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_map
 	int		p;
 	int		c;
 	int		e;
+	int		x;
+	int		y;
 }	t_map;
 
 typedef struct s_image
@@ -58,6 +60,13 @@ typedef struct s_image
 	mlx_texture_t	*t_exit;
 	mlx_image_t		*i_exit;
 }	t_image;
+
+typedef struct s_game
+{
+	mlx_t		*mlx;
+	t_map		*map;
+	int			cont;
+}	t_game;
 
 char	*get_next_line(int fd);
 bool	border(char **map, int row, int col);
