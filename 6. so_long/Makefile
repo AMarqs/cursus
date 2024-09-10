@@ -6,7 +6,7 @@
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 22:39:41 by albmarqu          #+#    #+#              #
-#    Updated: 2024/09/09 22:01:18 by albmarqu         ###   ########.fr        #
+#    Updated: 2024/09/10 19:03:10 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,15 @@ PRINTF = ./ft_printf
 HEADERS = -I $(LIBMLX) -I $(LIBFT) -I $(PRINTF)
 LIBRARIES = $(LIBMLX)/build/libmlx42.a $(LIBFT)/libft.a $(PRINTF)/libftprintf.a
 GLFW = -lglfw
-SRCS = 	so_long.c \
-		check.c \
+SRC = 	so_long.c \
+		args_check.c \
+		map_check.c \
 		floodfill.c \
 		map.c \
+		game.c \
 		get_next_line_bonus.c \
 		get_next_line_utils_bonus.c
+SRCS = $(addprefix src/, $(SRC))
 OBJS = $(SRCS:.c=.o)
 FLAGS = -Wall -Wextra -Werror -g # Añadir la bandera -g para la depuración -Ofast
 CC = gcc
