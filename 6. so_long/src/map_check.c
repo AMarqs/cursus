@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 19:41:53 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/10 19:17:07 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/11 12:41:40 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool	check_characters(t_map *map)
 	else if (map->e != 1)
 		write(2, "Error\nWrong number of exits (1 required)\n", 41);
 	else if (map->c < 1)
-		write(2, "Error\nWrong number of collectibles (minimum 1)\n", 56);
+		write(2, "Error\nWrong number of collectibles (minimum 1)\n", 47);
 	return (false);
 }
 
