@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 17:23:27 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/10 19:19:20 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:14:50 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ t_game	*init_game(t_map *map)
 	mlx_t	*mlx;
 	t_game	*game;
 
-	mlx = mlx_init((map->row * HEIGHT), (map->col * WIDTH), "so_long", false);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	mlx = mlx_init((map->row * HEIGHT), (map->col * WIDTH), "so_long", true);
 	if (!mlx)
 	{
 		write(2, "Error\nError initializing mlx\n", 30);
