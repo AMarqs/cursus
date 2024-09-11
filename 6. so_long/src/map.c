@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 21:15:18 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/10 19:18:44 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:44:52 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	load_texture(t_image *image, t_game *game)
 {
-	image->t_floor = mlx_load_png("./sprites/floor.png");
-	image->t_wall = mlx_load_png("./sprites/wall.png");
-	image->t_play = mlx_load_png("./sprites/player.png");
-	image->t_col = mlx_load_png("./sprites/collect.png");
-	image->t_exit = mlx_load_png("./sprites/exit.png");
+	image->t_floor = mlx_load_png("./textures/floor.png");
+	image->t_wall = mlx_load_png("./textures/wall.png");
+	image->t_play = mlx_load_png("./textures/player.png");
+	image->t_col = mlx_load_png("./textures/collect.png");
+	image->t_exit = mlx_load_png("./textures/exit.png");
 	if (!image->t_floor || !image->t_wall || !image->t_play
 		|| !image->t_col || !image->t_exit)
 	{

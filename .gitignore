@@ -18,12 +18,15 @@
 *.lib
 *.a
 
+
 # EXECUTABLES
 *.exe
 *.out
 # minitalk
 client
 server
+# so_long
+so_long
 
 # Compile Results
 *.cmd
