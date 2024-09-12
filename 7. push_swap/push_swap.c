@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:20 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/12 20:34:54 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/12 20:37:02 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	main(int argc, char **argv)
 	check_num_args(argc);
 	args2array(argc, argv, t_stack);
 	rep_nums(t_stack->stack_a);
-	// free stack_a and t_stack
 	if (t_stack->count == 1 || sorted(t_stack))
 	{
 		write(1, "ordenados", 9); // QUITARRRRR
@@ -47,7 +46,8 @@ int	main(int argc, char **argv)
 		free(t_stack);
 		return (0);
 	}
-	write(1, "desordenados", 12);
+	write(1, "desordenados", 12); // QUITARRRRR
+	// free stack_a and t_stack
 	free(t_stack->stack_a);
 	free(t_stack);
 	return (0);
