@@ -27,6 +27,8 @@ client
 server
 # so_long
 so_long
+# push_swap
+push_swap
 
 # Compile Results
 *.cmd
