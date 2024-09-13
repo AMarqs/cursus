@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:20 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/12 20:37:02 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:39:32 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,17 @@ int	main(int argc, char **argv)
 	}
 	write(1, "desordenados", 12); // QUITARRRRR
 	// free stack_a and t_stack
+	t_stack->stack_b = malloc(sizeof(int));
+	t_stack->len_a = t_stack->count;
+	t_stack->len_b = 0;
+	if (t_stack->count == 3)
+		three(t_stack);
+	else if (t_stack->count == 5)
+		five(t_stack);
+	//else
+		//many(t_stack);
 	free(t_stack->stack_a);
+	free(t_stack->stack_b);
 	free(t_stack);
 	return (0);
 }

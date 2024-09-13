@@ -6,7 +6,7 @@
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 22:39:41 by albmarqu          #+#    #+#              #
-#    Updated: 2024/09/11 17:58:42 by albmarqu         ###   ########.fr        #
+#    Updated: 2024/09/13 12:09:41 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC = 	so_long.c \
 SRCS = $(addprefix src/, $(SRC))
 OBJS = $(SRCS:.c=.o)
 FLAGS = -Wall -Wextra -Werror -g -Ofast
-CC = gcc
+CC = clang
 
 all: $(NAME)
 
