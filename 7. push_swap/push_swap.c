@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:20 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/18 19:13:02 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/19 20:59:57 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,18 @@ int	main(int argc, char **argv)
 	}
 	check_num_args(argc);
 	args2array(argc, argv, t_stack);
+	if (!args2array(argc, argv, t_stack))
+	{
+		write(2, "Error\n...n", 22);
+		// free nodos....
+		exit(EXIT_FAILURE);
+	}
+	//free(node)
 	rep_nums(t_stack->stack_a);
 	printf("count: %d\n", t_stack->count);
+
+/////////
+
 	t_stack->len_a = t_stack->count;
 	printf("\n");
 	if (t_stack->len_a == 1 || sorted(t_stack, A))
@@ -84,3 +94,5 @@ int	main(int argc, char **argv)
 	free(t_stack);
 	return (0);
 }
+
+// PONER TODOS LOS ERRORES SOLO ERROR

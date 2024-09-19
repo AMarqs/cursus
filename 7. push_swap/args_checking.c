@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:57:07 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/18 18:09:58 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/19 20:59:46 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,50 +59,91 @@ bool	only_nums(char **args)
 	return (true);
 }
 
-void	args2array(int argc, char **argv, t_stack *t_stack)
+t_list	*init_node(long num)
+{
+	t_list	*node;
+
+	node = malloc(sizeof(t_list));
+	if (node == NULL)
+		return (NULL);
+	node->num = num;
+	node->next = NULL;
+	node->prev = NULL;
+	return (node);
+}
+
+bool	args2array(int argc, char **argv, t_stack *t_stack)
 {
 	char	**arg_split;
 	int		i;
+	long	num;
+	t_list	*num1;
 
 	t_stack->count = argc - 1;
 	arg_split = split_args(argc, argv, t_stack);
 	if (!only_nums(arg_split))
 	{
 		write(2, "Error\nWrong arguments\n", 22);
-		exit(EXIT_FAILURE);
+		return (false);
 	}
-	t_stack->stack_a = malloc((t_stack->count) * sizeof(int));
+	i = 0;
+	num = ft_atol(arg_split[i++]);
+	if (num > INT_MAX || num < INT_MIN)
+	{
+		write(2, "Error\nNumber out of range\n", 26);
+		return (false);
+	}
+	t_stack->stack_a = malloc(sizeof(t_list));
 	if (t_stack->stack_a == NULL)
 	{
 		write(2, "Error\nFailed allocating memory\n", 31);
-		free(t_stack);
-		exit(EXIT_FAILURE);
+		return (false);
 	}
-	i = -1;
-	while (++i < t_stack->count)
-		t_stack->stack_a[i] = ft_atoi(arg_split[i]);
+	t_stack->stack_a = init_node(num);
+	if (t_stack->stack_a == NULL)
+		return (false);
+	num1 = t_stack->stack_a;
+	while (i < t_stack->count)
+	{
+		num = ft_atol(arg_split[i++]);
+		if (num > INT_MAX || num < INT_MIN)
+		{
+			write(2, "Error\nNumber out of range\n", 26);
+			return (false);
+		}
+		t_stack->stack_a->next = init_node(num);
+		if (t_stack->stack_a->next == NULL)
+			return (false);
+		t_stack->stack_a->next->prev = t_stack->stack_a;
+		t_stack->stack_a = t_stack->stack_a->next;
+	}
+	t_stack->stack_a = num1;
 	if (argc == 2)
 		free(arg_split);
+	return (true);
 }
 
-void	rep_nums(int *stack)
+void	rep_nums(t_list *stack)
 {
-	int	i;
-	int	j;
+	long	aux;
+	t_list	*aux1;
+	t_list	*act;
 
-	i = 0;
-	while (stack[i])
+	aux1 = stack;
+	while (aux1)
 	{
-		j = i + 1;
-		while (stack[j])
+		aux = aux1->num;
+		act = aux1->next;
+		while (act)
 		{
-			if (stack[i] == stack[j])
+			if (aux == act->num)
 			{
 				write(2, "Error\nRepeated numbers\n", 23);
+				// liberar cosas
 				exit(EXIT_FAILURE);
 			}
-			j++;
+			act = act->next;
 		}
-		i++;
+		aux1 = aux1->next;
 	}
 }

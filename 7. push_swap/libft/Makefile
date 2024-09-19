@@ -6,7 +6,7 @@
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/17 21:14:52 by albmarqu          #+#    #+#              #
-#    Updated: 2024/02/05 14:26:07 by albmarqu         ###   ########.fr        #
+#    Updated: 2024/09/19 20:19:19 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ FILES = ft_isalpha.c \
 		ft_memcmp.c \
 		ft_strnstr.c \
 		ft_atoi.c \
+		ft_atol.c \
 		ft_calloc.c \
 		ft_strdup.c \
 		ft_substr.c \

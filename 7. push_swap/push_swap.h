@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:14 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/18 17:45:39 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/19 20:38:32 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,24 @@
 # include <stdbool.h> // bool
 # include <limits.h> // INT_MAX
 
+typedef struct s_list
+{
+	long			num;
+	int				pos;
+	struct s_list	*next;
+	struct s_list	*prev;
+	int				cost;
+}	t_list;
 
 typedef struct s_stack
 {
-	int	*stack_a;
-	int	*stack_b;
-	int	count;
-	int	len_a;
-	int	len_b;
+	//int	*stack_a;
+	//int	*stack_b;
+	t_list	*stack_a;
+	t_list	*stack_b;
+	int		count;
+	int		len_a;
+	int		len_b;
 }	t_stack;
 
 typedef enum e_ab
@@ -36,9 +46,8 @@ typedef enum e_ab
 	B = 1
 }	t_ab;
 
-
 void	check_num_args(int argc);
-void	args2array(int argc, char **argv, t_stack *t_stack);
+bool	args2array(int argc, char **argv, t_stack *t_stack);
 bool	only_nums(char **args);
 void	rep_nums(int *stack);
 bool	sorted(t_stack *t_stack, int s);
