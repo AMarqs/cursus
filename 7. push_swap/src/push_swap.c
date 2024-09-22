@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:20 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/22 21:22:22 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:56:49 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 	normal(t_stack);
 	t_stack->stack_a = original_a;
 	printf("normalizado: ");
-	while(t_stack->stack_a)
+	while (t_stack->stack_a)
 	{
 		printf("%ld ", t_stack->stack_a->num);
 		t_stack->stack_a = t_stack->stack_a->next;
@@ -68,30 +68,25 @@ int	main(int argc, char **argv)
 	 	write(1, "ordenados\n", 10); // QUITARRRRR
 	// 	free(t_stack->stack_a);
 	// 	free(t_stack);
-	 	return (0);
+		return (0);
 	}
 	write(1, "desordenados\n", 13); // QUITARRRRR
-
-	
-/////////
-
-
-	t_stack->stack_b = malloc((t_stack->len_a) * sizeof(int));
+	t_stack->stack_b = malloc((t_stack->len_a) * sizeof(t_nodes));
 	t_stack->len_b = 0;
 	// free t_stack, stack_a and stack_b
 	if (t_stack->len_a == 2 || t_stack->len_a == 3)
 		three(t_stack);
-	else if (t_stack->len_a == 4 || t_stack->len_a== 5)
+	else if (t_stack->len_a == 4 || t_stack->len_a == 5)
 		five(t_stack);
 	printf("ordenado: ");
-	while(t_stack->stack_a)
+	while (t_stack->stack_a)
 	{
 		printf("%ld ", t_stack->stack_a->num);
 		t_stack->stack_a = t_stack->stack_a->next;
 	}
 	printf("\n");
-		
-	
+
+
 	// else
 	// many(t_stack);
 	// //free(t_stack->stack_a);

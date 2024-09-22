@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:14 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/22 19:42:19 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:59:18 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ typedef struct s_nodes
 
 typedef struct s_stack
 {
-	//int	*stack_a;
-	//int	*stack_b;
 	t_nodes	*stack_a;
 	t_nodes	*stack_b;
 	int		count;
