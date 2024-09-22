@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 11:52:05 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/22 15:56:46 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/22 19:35:36 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ra(t_stack *t_stack)
 
 	stack = t_stack->stack_a;
 	aux = stack->num;
-	while(stack->next)
+	while (stack->next)
 	{
 		stack->num = stack->next->num;
 		stack = stack->next;
@@ -29,27 +29,26 @@ void	ra(t_stack *t_stack)
 	write(1, "ra\n", 3);
 }
 
-// void	rb(t_stack *t_stack)
-// {
-// 	int	aux;
-// 	int	len;
-// 	int	*stack;
-// 	int	i;
+void	rb(t_stack *t_stack)
+{
+	t_nodes	*stack;
+	long	aux;
 
-// 	len = t_stack->len_b - 1;
-// 	stack = t_stack->stack_b;
-// 	aux = stack[0];
-// 	i = -1;
-// 	while (++i < len)
-// 		stack[i] = stack[i + 1];
-// 	stack[len] = aux;
-// 	t_stack->stack_b = stack;
-// 	write(1, "rb\n", 3);
-// }
+	stack = t_stack->stack_b;
+	aux = stack->num;
+	while (stack->next)
+	{
+		stack->num = stack->next->num;
+		stack = stack->next;
+	}
+	stack->num = aux;
+	t_stack->stack_b = stack;
+	write(1, "rb\n", 3);
+}
 
-// void	rr(t_stack *t_stack)
-// {
-// 	ra(t_stack);
-// 	rb(t_stack);
-// 	write(1, "rr\n", 3);
-// }
+void	rr(t_stack *t_stack)
+{
+	ra(t_stack);
+	rb(t_stack);
+	write(1, "rr\n", 3);
+}

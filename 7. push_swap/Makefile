@@ -6,7 +6,7 @@
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/12 16:01:18 by albmarqu          #+#    #+#              #
-#    Updated: 2024/09/20 18:50:47 by albmarqu         ###   ########.fr        #
+#    Updated: 2024/09/22 19:41:00 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,16 @@ LIBFT = ./libft
 HEADERS = -I $(LIBFT)
 LIBRARIES = $(LIBFT)/libft.a
 
-SRC = 	push_swap.c \
+SRCS = 	push_swap.c \
 		args_checking.c \
 		create_stack.c \
 		normalize.c \
-		# sa_sb_ss.c \
-		# pa_pb.c \
-		# ra_rb_rr.c \
-		# rra_rrb_rrr.c \
-		# basics.c
+		sa_sb_ss.c \
+		pa_pb.c \
+		ra_rb_rr.c \
+		rra_rrb_rrr.c \
+		basics.c
+SRC = $(addprefix src/, $(SRCS))
 OBJ = $(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror -Ofast -g

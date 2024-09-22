@@ -6,14 +6,14 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:14 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/20 20:15:54 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/22 19:42:19 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <stdlib.h> // Flags EXIT_SUCCESS and EXIT_FAILURE
 # include <unistd.h> // write
 # include <stdio.h> // printf----------------------------------BORRAR?
@@ -59,20 +59,19 @@ bool	args2array(int argc, char **argv, t_stack *t_stack);
 void	normal(t_stack *t_stack);
 long	normal_search(t_stack *t_stack, long prev);
 
-// void	sa(t_stack *t_stack);
-// void	sb(t_stack *t_stack);
-// void	ss(t_stack *t_stack);
-// void	pa(t_stack *t_stack);
-// void	pb(t_stack *t_stack);
-// void	ra(t_stack *t_stack);
-// void	rb(t_stack *t_stack);
-// void	rr(t_stack *t_stack);
-// void	rra(t_stack *t_stack);
-// void	rrb(t_stack *t_stack);
-// void	rrr(t_stack *t_stack);
+void	sa(t_stack *t_stack);
+void	sb(t_stack *t_stack);
+void	ss(t_stack *t_stack);
+void	pa(t_stack *t_stack);
+void	pb(t_stack *t_stack);
+void	ra(t_stack *t_stack);
+void	rb(t_stack *t_stack);
+void	rr(t_stack *t_stack);
+void	rra(t_stack *t_stack);
+void	rrb(t_stack *t_stack);
+void	rrr(t_stack *t_stack);
 
-// void	three(t_stack *t_stack);
-// int		*mins(t_stack *t_stack);
-// void	five(t_stack *t_stack);
+void	three(t_stack *t_stack);
+void	five(t_stack *t_stack);
 
 #endif
