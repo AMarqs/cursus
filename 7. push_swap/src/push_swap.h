@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:14 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/22 21:59:18 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 19:09:02 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_nodes
 	struct s_nodes	*next;
 	struct s_nodes	*prev;
 	int				cost;
+	int				target;
 }	t_nodes;
 
 typedef struct s_stack
@@ -71,5 +72,12 @@ void	rrr(t_stack *t_stack);
 
 void	three(t_stack *t_stack);
 void	five(t_stack *t_stack);
+
+void	calculate_pos(t_nodes *stack);
+int		find_next(t_nodes *stack, long num);
+void	targets(t_stack *t_stack);
+void	costs(t_stack *t_stack);
+void	random2pos(t_stack *t_stack);
+void	cost_algorithm(t_stack *t_stack);
 
 #endif

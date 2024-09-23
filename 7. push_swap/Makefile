@@ -6,7 +6,7 @@
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/12 16:01:18 by albmarqu          #+#    #+#              #
-#    Updated: 2024/09/22 19:41:00 by albmarqu         ###   ########.fr        #
+#    Updated: 2024/09/23 19:09:13 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS = 	push_swap.c \
 		pa_pb.c \
 		ra_rb_rr.c \
 		rra_rrb_rrr.c \
-		basics.c
+		basics.c \
+		algorithm.c
 SRC = $(addprefix src/, $(SRCS))
 OBJ = $(SRC:.c=.o)
 

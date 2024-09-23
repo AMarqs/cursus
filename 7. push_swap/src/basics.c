@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:37:13 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/22 21:48:08 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:35:49 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,13 @@ void	three(t_stack *t_stack) // 2 o 3 - max 3 movimientos
 
 void	five(t_stack *t_stack) // 4 o 5 - max 12 movimientos
 {
-	t_nodes	*stack;
-
-	stack = t_stack->stack_a;
-	while (t_stack->stack_a->next)
+	while (t_stack->len_b < 2)
 	{
 		if (t_stack->stack_a->num == 0 || t_stack->stack_a->num == 1)
 			pb(t_stack);
 		else
 			ra(t_stack);
-		t_stack->stack_a = t_stack->stack_a->next;
 	}
-	t_stack->stack_a = stack;
 	if (t_stack->stack_b->num < t_stack->stack_b->next->num)
 		sb(t_stack);
 	if (!sorted(t_stack, A))

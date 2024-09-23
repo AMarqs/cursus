@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 11:52:05 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/22 19:35:36 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/23 14:27:57 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	ra(t_stack *t_stack)
 
 	stack = t_stack->stack_a;
 	aux = stack->num;
-	while (stack->next)
+	while (t_stack->stack_a->next)
 	{
-		stack->num = stack->next->num;
-		stack = stack->next;
+		t_stack->stack_a->num = t_stack->stack_a->next->num;
+		t_stack->stack_a = t_stack->stack_a->next;
 	}
-	stack->num = aux;
+	t_stack->stack_a->num = aux;
 	t_stack->stack_a = stack;
 	write(1, "ra\n", 3);
 }
