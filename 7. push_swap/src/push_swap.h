@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:14 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 19:09:02 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/24 13:07:35 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # include <stdbool.h> // bool
 # include <limits.h> // INT_MAX
 
+typedef enum e_rotation
+{
+	AUBU = 0,
+	ADBD = 1,
+	AUBD = 2,
+	ADBU = 3
+}	t_rotation;
+
 typedef struct s_nodes
 {
 	long			num;
@@ -27,7 +35,10 @@ typedef struct s_nodes
 	struct s_nodes	*next;
 	struct s_nodes	*prev;
 	int				cost;
+	int				cost_a;
+	int				cost_b;
 	int				target;
+	t_rotation		rotation;
 }	t_nodes;
 
 typedef struct s_stack
@@ -76,6 +87,8 @@ void	five(t_stack *t_stack);
 void	calculate_pos(t_nodes *stack);
 int		find_next(t_nodes *stack, long num);
 void	targets(t_stack *t_stack);
+int		ft_abs(int n);
+int		total_cost(t_stack *t_stack, t_nodes *stack, int cost_a, int cost_b);
 void	costs(t_stack *t_stack);
 void	random2pos(t_stack *t_stack);
 void	cost_algorithm(t_stack *t_stack);
