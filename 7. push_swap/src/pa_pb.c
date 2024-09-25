@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 11:51:29 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 17:34:48 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/25 20:03:15 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	pa(t_stack *t_stack)
 		t_stack->stack_a = t_stack->stack_b;
 		t_stack->stack_b = t_stack->stack_b->next;
 		t_stack->stack_a->next = aux;
+		t_stack->stack_a->next->prev = t_stack->stack_a;
 	}
 	if (t_stack->stack_b)
 		t_stack->stack_b->prev = NULL;
@@ -56,6 +57,7 @@ void	pb(t_stack *t_stack)
 		t_stack->stack_b = t_stack->stack_a;
 		t_stack->stack_a = t_stack->stack_a->next;
 		t_stack->stack_b->next = aux;
+		t_stack->stack_b->next->prev = t_stack->stack_b;
 	}
 	if (t_stack->stack_a)
 		t_stack->stack_a->prev = NULL;

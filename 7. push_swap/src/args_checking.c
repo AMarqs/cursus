@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:57:07 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/20 18:46:40 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/25 21:13:14 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_num_args(int argc)
 {
 	if (argc < 2)
 	{
-		write(2, "Error\nNo arguments\n", 19); // Con 0 argunmentos que tiene que hacer ??? (hoja evaluacion)
+		write(2, "Error\n", 6); // Con 0 argunmentos que tiene que hacer ??? (hoja evaluacion)
 		exit(EXIT_FAILURE);
 	}
 }
@@ -58,7 +58,7 @@ void	rep_nums(t_nodes *stack)
 		{
 			if (aux == act->num)
 			{
-				write(2, "Error\nRepeated numbers\n", 23);
+				write(2, "Error\n", 6);
 				// liberar cosas
 				exit(EXIT_FAILURE);
 			}

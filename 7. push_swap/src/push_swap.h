@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:14 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/24 13:07:35 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:41:08 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	targets(t_stack *t_stack);
 int		ft_abs(int n);
 int		total_cost(t_stack *t_stack, t_nodes *stack, int cost_a, int cost_b);
 void	costs(t_stack *t_stack);
+int		min_cost(t_stack *t_stack);
+void	moving(t_stack *t_stack, int pos_cost);
 void	random2pos(t_stack *t_stack);
 void	cost_algorithm(t_stack *t_stack);
 
