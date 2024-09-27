@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:20 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 19:46:06 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:29:24 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-bool	sorted(t_nodes *stack)
-{
-	while (stack->next)
-	{
-		if (stack->num > stack->next->num)
-			return (false);
-		stack = stack->next;
-	}
-	return (true);
-}
 
 void	frees(t_stack *t_stack)
 {
@@ -41,6 +30,8 @@ void	frees(t_stack *t_stack)
 		while (t_stack->stack_a)
 		{
 			aux = t_stack->stack_a->next;
+			printf("a %p\n", t_stack->stack_a);
+			fflush(stdout);
 			free(t_stack->stack_a);
 			t_stack->stack_a = aux;
 		}
@@ -48,12 +39,19 @@ void	frees(t_stack *t_stack)
 	free(t_stack);
 }
 
-int	main(int argc, char **argv)
+bool	sorted(t_nodes *stack)
 {
-	t_stack	*t_stack;
-	t_nodes	*prueba;
+	while (stack->next)
+	{
+		if (stack->num > stack->next->num)
+			return (false);
+		stack = stack->next;
+	}
+	return (true);
+}
 
-	t_stack = malloc(sizeof(t_stack));
+void	main_check(t_stack *t_stack, int argc, char **argv)
+{
 	if (t_stack == NULL)
 	{
 		write(2, "Error\n", 6);
@@ -66,16 +64,18 @@ int	main(int argc, char **argv)
 		frees(t_stack);
 		exit(EXIT_FAILURE);
 	}
+}
+
+int	main(int argc, char **argv)
+{
+	t_stack	*t_stack;
+
+	t_stack = malloc(sizeof(t_stack));
+	main_check(t_stack, argc, argv);
 	normal(t_stack);
 	t_stack->len_a = t_stack->count;
 	if (t_stack->len_a == 1 || sorted(t_stack->stack_a))
 	{
-		prueba = t_stack->stack_a;
-		while (prueba)
-		{
-			printf("%ld ", prueba->num);
-			prueba = prueba->next;
-		}
 		frees(t_stack);
 		exit(EXIT_SUCCESS);
 	}
@@ -87,11 +87,6 @@ int	main(int argc, char **argv)
 		five(t_stack);
 	else
 		cost_algorithm(t_stack);
-	while (t_stack->stack_a)
-	{
-		printf("%ld\n", t_stack->stack_a->num);
-		t_stack->stack_a = t_stack->stack_a->next;
-	}
 	frees(t_stack);
 	return (0);
 }

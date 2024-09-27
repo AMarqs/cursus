@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 20:27:54 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 20:29:15 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:41:23 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,25 @@ int	ft_abs(int n)
 	if (n < 0)
 		n = n * -1;
 	return (n);
+}
+
+int	min_cost(t_stack *t_stack)
+{
+	t_nodes	*stack_b;
+	int		min_cost;
+	int		pos_cost;
+
+	stack_b = t_stack->stack_b;
+	min_cost = INT_MAX;
+	pos_cost = 0;
+	while (stack_b)
+	{
+		if (stack_b->cost < min_cost)
+		{
+			min_cost = stack_b->cost;
+			pos_cost = stack_b->pos;
+		}
+		stack_b = stack_b->next;
+	}
+	return (pos_cost);
 }

@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:14 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 20:26:39 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:07:15 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef enum e_ab
 
 bool	sorted(t_nodes *stack);
 void	frees(t_stack *t_stack);
+void	main_check(t_stack *t_stack, int argc, char **argv);
 
 void	check_num_args(int argc);
 bool	only_nums(char **args);
@@ -65,6 +66,8 @@ bool	rep_nums(t_nodes *stack);
 
 char	**split_args(int argc, char **argv, t_stack *t_stack);
 t_nodes	*init_node(long num);
+void	free_split(char **arg_split);
+bool	node_loop(int argc, t_stack *t_stack, char **arg_split, int i);
 bool	args2array(int argc, char **argv, t_stack *t_stack);
 
 void	normal(t_stack *t_stack);
@@ -99,11 +102,16 @@ void	calculate_pos(t_nodes *stack);
 int		find_next(t_nodes *stack, long num);
 void	targets(t_stack *t_stack);
 int		ft_abs(int n);
+int		min_cost(t_stack *t_stack);
 
 int		total_cost(t_stack *t_stack, t_nodes *stack, int cost_a, int cost_b);
 void	costs(t_stack *t_stack);
-int		min_cost(t_stack *t_stack);
 
+
+void	aubu(t_stack *t_stack, int target, int pos_cost);
+void	adbd(t_stack *t_stack, int target, int pos_cost);
+void	aubd(t_stack *t_stack, int target, int pos_cost);
+void	adbu(t_stack *t_stack, int target, int pos_cost);
 void	moving(t_stack *t_stack, int pos_cost);
 
 

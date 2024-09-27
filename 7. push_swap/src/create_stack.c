@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:38:05 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 19:37:55 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 22:18:47 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,15 @@ char	**split_args(int argc, char **argv, t_stack *t_stack)
 			exit(EXIT_FAILURE);
 		}
 		arg_split = ft_split(argv[1], ' ');
-		t_stack->count--;
+		t_stack->count = 0;
 		while (arg_split[t_stack->count])
 			t_stack->count++;
 	}
 	else
+	{
 		arg_split = argv + 1;
+		t_stack->count = argc - 1;
+	}
 	return (arg_split);
 }
 
@@ -46,14 +49,40 @@ t_nodes	*init_node(long num)
 	return (node);
 }
 
+void	free_split(char **arg_split)
+{
+	int	i;
+
+	i = 0;
+	while (arg_split[i])
+		free(arg_split[i++]);
+	free(arg_split);
+}
+
+bool	node_loop(int argc, t_stack *t_stack, char **arg_split, int i)
+{
+	long	num;
+
+	num = ft_atol(arg_split[i]);
+	t_stack->stack_a->next = init_node(num);
+	if (num > INT_MAX || num < INT_MIN || t_stack->stack_a->next == NULL)
+	{
+		if (argc == 2)
+			free_split(arg_split);
+		return (false);
+	}
+	t_stack->stack_a->next->prev = t_stack->stack_a;
+	t_stack->stack_a = t_stack->stack_a->next;
+	return (true);
+}
+
 bool	args2array(int argc, char **argv, t_stack *t_stack)
 {
 	char	**arg_split;
 	int		i;
 	long	num;
-	t_nodes	*num1;
+	t_nodes	*first;
 
-	t_stack->count = argc - 1;
 	arg_split = split_args(argc, argv, t_stack);
 	if (!only_nums(arg_split))
 		return (false);
@@ -64,27 +93,12 @@ bool	args2array(int argc, char **argv, t_stack *t_stack)
 	t_stack->stack_a = init_node(num);
 	if (t_stack->stack_a == NULL)
 		return (false);
-	num1 = t_stack->stack_a;
+	first = t_stack->stack_a;
 	while (i < t_stack->count)
-	{
-		num = ft_atol(arg_split[i++]);
-		if (num > INT_MAX || num < INT_MIN)
+		if (!node_loop(argc, t_stack, arg_split, i++))
 			return (false);
-		t_stack->stack_a->next = init_node(num);
-		if (t_stack->stack_a->next == NULL)
-			return (false);
-		t_stack->stack_a->next->prev = t_stack->stack_a;
-		t_stack->stack_a = t_stack->stack_a->next;
-	}
-	t_stack->stack_a = num1;
-	i = 0;
+	t_stack->stack_a = first;
 	if (argc == 2)
-	{
-		while (arg_split[i])
-			free(arg_split[i++]);
-		free(arg_split);
-	}
-	// frees(t_stack);
-	// exit(EXIT_SUCCESS);
+		free_split(arg_split);
 	return (true);
 }
