@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:14 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/25 16:41:08 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:55:30 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ typedef enum e_ab
 	B = 1
 }	t_ab;
 
-bool	sorted(t_stack *t_stack, int s);
+bool	sorted(t_nodes *stack);
+void	frees(t_stack *t_stack);
 
 void	check_num_args(int argc);
 bool	only_nums(char **args);

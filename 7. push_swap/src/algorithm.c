@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:06:01 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/25 20:04:57 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 14:00:52 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,26 +166,33 @@ void	moving(t_stack *t_stack, int pos_cost)
 	int			target;
 	int			cost;
 
+	// printf("stack B: %p\n", t_stack->stack_b);
+	// printf("stack B next: %p\n", t_stack->stack_b->next);
+	// fflush(stdout);
 	stack_b = t_stack->stack_b;
+	// printf("stack B: %p\n", stack_b);
+	// fflush(stdout);
 	while (pos_cost != stack_b->pos)
 		stack_b = stack_b->next;
 	rotation = stack_b->rotation;
 	target = stack_b->target;
-	cost = stack_b->cost;
+	cost = stack_b->cost; ////////////////////////////////
 	if (target != 0 || pos_cost != 0)
 	{
 		if (rotation == AUBU)
 		{
 			if (target != 0 && pos_cost != 0)
 			{
-				while (target != t_stack->len_a || pos_cost != t_stack->len_b)
+				while (target != t_stack->len_a && pos_cost != t_stack->len_b)
 				{
+					// printf("len: %d\n", t_stack->len_b);
+					// fflush(stdout);
 					rrr(t_stack);
 					pos_cost++;
 					target++;
 				}
 			}
-			if (target == 0)
+			if (target == 0 || target == t_stack->len_a)
 			{
 				while (pos_cost != t_stack->len_b)
 				{
@@ -206,7 +213,7 @@ void	moving(t_stack *t_stack, int pos_cost)
 		{
 			if (target != 0 && pos_cost != 0)
 			{
-				while (target != 0 || pos_cost != 0)
+				while (target != 0 && pos_cost != 0)
 				{
 					rr(t_stack);
 					pos_cost--;
@@ -234,7 +241,7 @@ void	moving(t_stack *t_stack, int pos_cost)
 		{
 			if (target != 0 && pos_cost != 0)
 			{
-				while (target != t_stack->len_a || pos_cost != 0)
+				while (target != t_stack->len_a && pos_cost != 0)
 				{
 					rra(t_stack);
 					rb(t_stack);
@@ -263,7 +270,7 @@ void	moving(t_stack *t_stack, int pos_cost)
 		{
 			if (target != 0 && pos_cost != 0)
 			{
-				while (target != 0 || pos_cost != t_stack->len_b)
+				while (target != 0 && pos_cost != t_stack->len_b)
 				{
 					ra(t_stack);
 					rrb(t_stack);
@@ -273,7 +280,7 @@ void	moving(t_stack *t_stack, int pos_cost)
 			}
 			if (target == t_stack->len_a || target == 0)
 			{
-				while (pos_cost != 0)
+				while (pos_cost != t_stack->len_b)
 				{
 					rrb(t_stack);
 					pos_cost++;
@@ -281,7 +288,7 @@ void	moving(t_stack *t_stack, int pos_cost)
 			}
 			else
 			{
-				while (target != t_stack->len_a)
+				while (target != 0)
 				{
 					ra(t_stack);
 					target--;
@@ -289,7 +296,13 @@ void	moving(t_stack *t_stack, int pos_cost)
 			}
 		}
 	}
+	// printf("7stack B: %p\n", t_stack->stack_b);
+	// printf("7stack B next: %p\n", t_stack->stack_b->next);
+	// fflush(stdout);
 	pa(t_stack);
+	// printf("8stack B: %p\n", t_stack->stack_b);
+	// printf("8stack B next: %p\n", t_stack->stack_b->next);
+	// fflush(stdout);
 }
 
 void	zero_first(t_stack *t_stack)
@@ -325,16 +338,35 @@ void	random2pos(t_stack *t_stack)
 {
 	int	pos_min_cost;
 
+	// printf("1stack B: %p\n", t_stack->stack_b);
+	// fflush(stdout);
 	calculate_pos(t_stack->stack_b);
+	// printf("2stack B: %p\n", t_stack->stack_b);
+	// fflush(stdout);
 	calculate_pos(t_stack->stack_a);
+	// printf("3stack B: %p\n", t_stack->stack_b);
+	// fflush(stdout);
 	targets(t_stack);
+	// printf("4stack B: %p\n", t_stack->stack_b);
+	// fflush(stdout);
 	costs(t_stack);
+	// printf("5stack B: %p\n", t_stack->stack_b);
+	// fflush(stdout);
 	pos_min_cost = min_cost(t_stack);
+	// printf("6stack B: %p\n", t_stack->stack_b);
+	// fflush(stdout);
 	moving(t_stack, pos_min_cost);
 }
 
 void	cost_algorithm(t_stack *t_stack)
 {
+	while (t_stack->len_a > (t_stack->count / 2))
+	{
+		if (t_stack->stack_a->num <= (t_stack->count / 2))
+			pb(t_stack);
+		else
+			ra(t_stack);
+	}
 	while (t_stack->len_a > 3)
 	{
 		if (t_stack->stack_a->num < t_stack->count - 3)

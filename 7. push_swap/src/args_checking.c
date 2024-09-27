@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:57:07 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/25 21:13:14 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:48:20 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ bool	only_nums(char **args)
 	{
 		j = 0;
 		if (args[i][j] == '-')
-			j++;
+			if (!args[i][++j])
+				return (false);
 		while (args[i][j])
 		{
 			if (args[i][j] < '0' || args[i][j] > '9')

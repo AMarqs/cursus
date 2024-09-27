@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:41:50 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/22 14:39:14 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:58:34 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ long	normal_search(t_stack *t_stack, long prev)
 		pos++;
 	}
 	t_stack->stack_a = first;
-	// printf("pos_aux: %d \n", pos_aux);
 	while (pos_aux-- > 0)
 		t_stack->stack_a = t_stack->stack_a->next;
 	t_stack->stack_a->num = i++;

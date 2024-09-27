@@ -6,35 +6,16 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 11:52:05 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/23 14:27:57 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 13:00:50 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_stack *t_stack)
+void	rotate(t_nodes *stack)
 {
-	t_nodes	*stack;
 	long	aux;
 
-	stack = t_stack->stack_a;
-	aux = stack->num;
-	while (t_stack->stack_a->next)
-	{
-		t_stack->stack_a->num = t_stack->stack_a->next->num;
-		t_stack->stack_a = t_stack->stack_a->next;
-	}
-	t_stack->stack_a->num = aux;
-	t_stack->stack_a = stack;
-	write(1, "ra\n", 3);
-}
-
-void	rb(t_stack *t_stack)
-{
-	t_nodes	*stack;
-	long	aux;
-
-	stack = t_stack->stack_b;
 	aux = stack->num;
 	while (stack->next)
 	{
@@ -42,13 +23,23 @@ void	rb(t_stack *t_stack)
 		stack = stack->next;
 	}
 	stack->num = aux;
-	t_stack->stack_b = stack;
+}
+	
+void	ra(t_stack *t_stack)
+{
+	rotate(t_stack->stack_a);
+	write(1, "ra\n", 3);
+}
+
+void	rb(t_stack *t_stack)
+{
+	rotate(t_stack->stack_b);
 	write(1, "rb\n", 3);
 }
 
 void	rr(t_stack *t_stack)
 {
-	ra(t_stack);
-	rb(t_stack);
+	rotate(t_stack->stack_a);
+	rotate(t_stack->stack_b);
 	write(1, "rr\n", 3);
 }
