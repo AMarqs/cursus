@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:57:07 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 15:48:20 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:45:25 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_num_args(int argc)
 {
 	if (argc < 2)
 	{
-		write(2, "Error\n", 6); // Con 0 argunmentos que tiene que hacer ??? (hoja evaluacion)
+		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -44,7 +44,7 @@ bool	only_nums(char **args)
 	return (true);
 }
 
-void	rep_nums(t_nodes *stack)
+bool	rep_nums(t_nodes *stack)
 {
 	long	aux;
 	t_nodes	*aux1;
@@ -58,13 +58,10 @@ void	rep_nums(t_nodes *stack)
 		while (act)
 		{
 			if (aux == act->num)
-			{
-				write(2, "Error\n", 6);
-				// liberar cosas
-				exit(EXIT_FAILURE);
-			}
+				return (false);
 			act = act->next;
 		}
 		aux1 = aux1->next;
 	}
+	return (true);
 }

@@ -6,13 +6,13 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:37:13 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 17:54:32 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:47:18 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	three(t_stack *t_stack) // 2 o 3 - max 3 movimientos
+void	three(t_stack *t_stack)
 {
 	t_nodes	*stack;
 
@@ -33,7 +33,7 @@ void	three(t_stack *t_stack) // 2 o 3 - max 3 movimientos
 	}
 }
 
-void	five(t_stack *t_stack) // 4 o 5 - max 12 movimientos
+void	five(t_stack *t_stack)
 {
 	while (t_stack->len_b < 2)
 	{

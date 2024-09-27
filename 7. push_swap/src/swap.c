@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sa_sb_ss.c                                         :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 11:50:14 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 13:08:43 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 20:05:10 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	swap(t_nodes *stack)
 	stack->num = stack->next->num;
 	stack->next->num = aux;
 }
+
 void	sa(t_stack *t_stack)
 {
 	if (t_stack->len_a < 2)

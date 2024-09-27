@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:38:05 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 18:07:41 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:37:55 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ bool	args2array(int argc, char **argv, t_stack *t_stack)
 	int		i;
 	long	num;
 	t_nodes	*num1;
-	int count;
 
-	count = argc;
-	t_stack->count = (count - 1);
+	t_stack->count = argc - 1;
 	arg_split = split_args(argc, argv, t_stack);
 	if (!only_nums(arg_split))
 		return (false);

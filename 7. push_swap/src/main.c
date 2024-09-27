@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:20 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 18:06:58 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/27 19:46:06 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ bool	sorted(t_nodes *stack)
 void	frees(t_stack *t_stack)
 {
 	t_nodes	*aux;
-	
-	// if (t_stack->stack_b)
-	// {
-	// 	while (t_stack->stack_b)
-	// 	{
-	// 		aux = t_stack->stack_b->next;
-	// 		free(t_stack->stack_b);
-	// 		t_stack->stack_b = aux;
-	// 	}
-	// }
+
+	if (t_stack->stack_b)
+	{
+		while (t_stack->stack_b)
+		{
+			aux = t_stack->stack_b->next;
+			free(t_stack->stack_b);
+			t_stack->stack_b = aux;
+		}
+	}
 	if (t_stack->stack_a)
 	{
 		while (t_stack->stack_a)
@@ -60,13 +60,12 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	check_num_args(argc);
-	if (!args2array(argc, argv, t_stack))
+	if (!args2array(argc, argv, t_stack) || !rep_nums(t_stack->stack_a))
 	{
 		write(2, "Error\n", 6);
 		frees(t_stack);
 		exit(EXIT_FAILURE);
 	}
-	rep_nums(t_stack->stack_a);
 	normal(t_stack);
 	t_stack->len_a = t_stack->count;
 	if (t_stack->len_a == 1 || sorted(t_stack->stack_a))

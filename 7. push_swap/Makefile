@@ -6,7 +6,7 @@
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/12 16:01:18 by albmarqu          #+#    #+#              #
-#    Updated: 2024/09/23 19:09:13 by albmarqu         ###   ########.fr        #
+#    Updated: 2024/09/27 20:30:23 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,19 @@ LIBFT = ./libft
 HEADERS = -I $(LIBFT)
 LIBRARIES = $(LIBFT)/libft.a
 
-SRCS = 	push_swap.c \
+SRCS = 	main.c \
 		args_checking.c \
 		create_stack.c \
 		normalize.c \
-		sa_sb_ss.c \
-		pa_pb.c \
-		ra_rb_rr.c \
-		rra_rrb_rrr.c \
+		swap.c \
+		push.c \
+		rotate.c \
+		reverse.c \
 		basics.c \
-		algorithm.c
+		algorithm.c \
+		pos_utils.c \
+		costs.c \
+		movement.c
 SRC = $(addprefix src/, $(SRCS))
 OBJ = $(SRC:.c=.o)
 
