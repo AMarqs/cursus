@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:14 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/28 16:45:23 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 19:07:21 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 # define PUSH_SWAP_H
 
 # include "../libft/libft.h"
-# include <stdlib.h> // Flags EXIT_SUCCESS and EXIT_FAILURE
-# include <unistd.h> // write
-# include <stdio.h> // printf----------------------------------BORRAR?
-# include <stdbool.h> // bool
-# include <limits.h> // INT_MAX
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdbool.h>
+# include <limits.h>
 
 typedef enum e_rotation
 {
@@ -56,63 +56,64 @@ typedef enum e_ab
 	B = 1
 }	t_ab;
 
-bool	sorted(t_nodes *stack);
-void	frees(t_stack *t_stack);
-void	main_check(t_stack *t_stack, int argc, char **argv);
+void	frees(t_stack *stack);
+bool	sorted(t_nodes *stack_a);
+t_stack	*main_check(int argc, char **argv, t_stack *stack);
 
-bool	check_num_args(int argc);
+bool	check_num_args(int argc, char **argv);
 bool	only_nums(char **args);
-bool	rep_nums(t_nodes *stack);
+bool	rep_nums(t_nodes *stack_a);
 
-char	**split_args(int argc, char **argv, t_stack *t_stack);
+char	**split_args(int argc, char **argv, t_stack *stack);
 t_nodes	*init_node(long num);
 void	free_split(char **arg_split);
-bool	node_loop(int argc, t_stack *t_stack, char **arg_split, int i);
-bool	args2array(int argc, char **argv, t_stack *t_stack);
+bool	node_loop(int argc, t_stack *stack, char **arg_split, int i);
+bool	args2array(int argc, char **argv, t_stack *stack);
 
-void	normal(t_stack *t_stack);
-long	normal_search(t_stack *t_stack, long prev);
+long	normal_search(t_stack *stack, long prev);
+void	normal(t_stack *stack);
 
-void	swap(t_nodes *stack);
-void	sa(t_stack *t_stack);
-void	sb(t_stack *t_stack);
-void	ss(t_stack *t_stack);
+void	swap(t_nodes *stack_x);
+void	sa(t_stack *stack);
+void	sb(t_stack *stack);
+void	ss(t_stack *stack);
 
-void	pa(t_stack *t_stack);
-void	pb(t_stack *t_stack);
+void	pa(t_stack *stack);
+void	pb(t_stack *stack);
 
-void	rotate(t_nodes *stack);
-void	ra(t_stack *t_stack);
-void	rb(t_stack *t_stack);
-void	rr(t_stack *t_stack);
+void	rotate(t_nodes *stack_x);
+void	ra(t_stack *stack);
+void	rb(t_stack *stack);
+void	rr(t_stack *stack);
 
-void	reverse(t_nodes *stack);
-void	rra(t_stack *t_stack);
-void	rrb(t_stack *t_stack);
-void	rrr(t_stack *t_stack);
+void	reverse(t_nodes *stack_x);
+void	rra(t_stack *stack);
+void	rrb(t_stack *stack);
+void	rrr(t_stack *stack);
 
-void	three(t_stack *t_stack);
-void	five(t_stack *t_stack);
+void	three(t_stack *stack);
+void	five(t_stack *stack);
 
-void	random2pos(t_stack *t_stack);
-void	zero_first(t_stack *t_stack);
-void	cost_algorithm(t_stack *t_stack);
+void	random2pos(t_stack *stack);
+void	zero_first(t_stack *stack);
+void	cost_algorithm(t_stack *stack);
 
-void	calculate_pos(t_nodes *stack);
-int		find_next(t_nodes *stack, long num);
-void	targets(t_stack *t_stack);
+void	calculate_pos(t_nodes *stack_x);
+int		find_next(t_nodes *stack_a, long num);
+void	targets(t_stack *stack);
 int		ft_abs(int n);
-int		min_cost(t_stack *t_stack);
+int		min_cost(t_stack *stack);
 
-int		total_cost(t_stack *t_stack, t_nodes *stack, int cost_a, int cost_b);
-void	costs(t_stack *t_stack);
+void	same_dir(t_nodes *stack_b, int cost_a, int cost_b);
+void	diff_dir2(t_stack *stack, t_nodes *stack_b, int cost_a, int cost_b);
+void	diff_dir1(t_stack *stack, t_nodes *stack_b, int cost_a, int cost_b);
+void	total_cost(t_stack *stack, t_nodes *stack_b, int cost_a, int cost_b);
+void	costs(t_stack *stack);
 
-
-void	aubu(t_stack *t_stack, int target, int pos_cost);
-void	adbd(t_stack *t_stack, int target, int pos_cost);
-void	aubd(t_stack *t_stack, int target, int pos_cost);
-void	adbu(t_stack *t_stack, int target, int pos_cost);
-void	moving(t_stack *t_stack, int pos_cost);
-
+void	aubu(t_stack *stack, int target, int pos_cost);
+void	adbd(t_stack *stack, int target, int pos_cost);
+void	aubd(t_stack *stack, int target, int pos_cost);
+void	adbu(t_stack *stack, int target, int pos_cost);
+void	moving(t_stack *stack, int pos_cost);
 
 #endif

@@ -6,67 +6,68 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:20 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/28 17:05:21 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:42:30 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	frees(t_stack *t_stack)
+void	frees(t_stack *stack)
 {
 	t_nodes	*aux;
 
-	if (t_stack->stack_a)
+	if (stack->stack_a)
 	{
-		while (t_stack->stack_a)
+		while (stack->stack_a)
 		{
-			aux = t_stack->stack_a->next;
-			free(t_stack->stack_a);
-			t_stack->stack_a = aux;
+			aux = stack->stack_a->next;
+			free(stack->stack_a);
+			stack->stack_a = aux;
 		}
 	}
-	free(t_stack);
+	free(stack);
 }
 
-bool	sorted(t_nodes *stack)
+bool	sorted(t_nodes *stack_a)
 {
-	while (stack->next)
+	while (stack_a->next)
 	{
-		if (stack->num > stack->next->num)
+		if (stack_a->num > stack_a->next->num)
 			return (false);
-		stack = stack->next;
+		stack_a = stack_a->next;
 	}
 	return (true);
 }
 
-void	main_check(t_stack *t_stack, int argc, char **argv)
+t_stack	*main_check(int argc, char **argv, t_stack *stack)
 {
-	if (t_stack == NULL)
+	if (stack == NULL)
 	{
 		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
-	if (!check_num_args(argc) || !args2array(argc, argv, t_stack) || !rep_nums(t_stack->stack_a))
+	if (!check_num_args(argc, argv))
 	{
 		write(2, "Error\n", 6);
-		frees(t_stack);
+		free(stack);
 		exit(EXIT_FAILURE);
 	}
+	if (!args2array(argc, argv, stack) || !rep_nums(stack->stack_a))
+	{
+		write(2, "Error\n", 6);
+		frees(stack);
+		exit(EXIT_FAILURE);
+	}
+	return (stack);
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack	*stack;
 
-	if (argv[1][0] == 0)
-	{
-		write(2, "Error2\n", 7);
-		exit(EXIT_SUCCESS);
-	}
-		
 	stack = (t_stack *)malloc(sizeof(t_stack));
 	stack->count = 0;
-	main_check(stack, argc, argv);
+	main_check(argc, argv, stack);
 	normal(stack);
 	stack->len_a = stack->count;
 	if (stack->len_a == 1 || sorted(stack->stack_a))

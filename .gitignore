@@ -29,6 +29,9 @@ server
 so_long
 # push_swap
 push_swap
+./Push-Swap-Tester
+push_swap_test_linux copy.sh
+traces.txt
 
 # Compile Results
 *.cmd

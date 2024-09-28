@@ -6,62 +6,62 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 11:51:29 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 20:05:07 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:32:53 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pa(t_stack *t_stack)
+void	pa(t_stack *stack)
 {
 	t_nodes	*aux;
 
-	if (t_stack->len_b == 0)
+	if (stack->len_b == 0)
 		return ;
-	if (t_stack->stack_a == NULL)
+	if (stack->stack_a == NULL)
 	{
-		t_stack->stack_a = t_stack->stack_b;
-		t_stack->stack_b = t_stack->stack_b->next;
-		t_stack->stack_a->next = NULL;
+		stack->stack_a = stack->stack_b;
+		stack->stack_b = stack->stack_b->next;
+		stack->stack_a->next = NULL;
 	}
 	else
 	{
-		aux = t_stack->stack_a;
-		t_stack->stack_a = t_stack->stack_b;
-		t_stack->stack_b = t_stack->stack_b->next;
-		t_stack->stack_a->next = aux;
-		t_stack->stack_a->next->prev = t_stack->stack_a;
+		aux = stack->stack_a;
+		stack->stack_a = stack->stack_b;
+		stack->stack_b = stack->stack_b->next;
+		stack->stack_a->next = aux;
+		stack->stack_a->next->prev = stack->stack_a;
 	}
-	if (t_stack->stack_b)
-		t_stack->stack_b->prev = NULL;
-	t_stack->len_a++;
-	t_stack->len_b--;
+	if (stack->stack_b)
+		stack->stack_b->prev = NULL;
+	stack->len_a++;
+	stack->len_b--;
 	write(1, "pa\n", 3);
 }
 
-void	pb(t_stack *t_stack)
+void	pb(t_stack *stack)
 {
 	t_nodes	*aux;
 
-	if (t_stack->len_a == 0)
+	if (stack->len_a == 0)
 		return ;
-	if (t_stack->stack_b == NULL)
+	if (stack->stack_b == NULL)
 	{
-		t_stack->stack_b = t_stack->stack_a;
-		t_stack->stack_a = t_stack->stack_a->next;
-		t_stack->stack_b->next = NULL;
+		stack->stack_b = stack->stack_a;
+		stack->stack_a = stack->stack_a->next;
+		stack->stack_b->next = NULL;
 	}
 	else
 	{
-		aux = t_stack->stack_b;
-		t_stack->stack_b = t_stack->stack_a;
-		t_stack->stack_a = t_stack->stack_a->next;
-		t_stack->stack_b->next = aux;
-		t_stack->stack_b->next->prev = t_stack->stack_b;
+		aux = stack->stack_b;
+		stack->stack_b = stack->stack_a;
+		stack->stack_a = stack->stack_a->next;
+		stack->stack_b->next = aux;
+		stack->stack_b->next->prev = stack->stack_b;
 	}
-	if (t_stack->stack_a)
-		t_stack->stack_a->prev = NULL;
-	t_stack->len_a--;
-	t_stack->len_b++;
+	if (stack->stack_a)
+		stack->stack_a->prev = NULL;
+	stack->len_a--;
+	stack->len_b++;
 	write(1, "pb\n", 3);
 }

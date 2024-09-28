@@ -6,46 +6,46 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:37:13 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 19:47:18 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:18:36 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	three(t_stack *t_stack)
+void	three(t_stack *stack)
 {
-	t_nodes	*stack;
+	t_nodes	*stack_a;
 
-	stack = t_stack->stack_a;
-	if (t_stack->len_a == 2)
-		sa(t_stack);
+	stack_a = stack->stack_a;
+	if (stack->len_a == 2)
+		sa(stack);
 	else
 	{
-		if (stack->num > stack->next->num
-			&& stack->num > stack->next->next->num)
-			ra(t_stack);
-		else if (stack->next->num > stack->num
-			&& stack->next->num > stack->next->next->num)
-			rra(t_stack);
-		if (stack->num > stack->next->num)
-			sa(t_stack);
-		t_stack->stack_a = stack;
+		if (stack_a->num > stack_a->next->num
+			&& stack_a->num > stack_a->next->next->num)
+			ra(stack);
+		else if (stack_a->next->num > stack_a->num
+			&& stack_a->next->num > stack_a->next->next->num)
+			rra(stack);
+		if (stack_a->num > stack_a->next->num)
+			sa(stack);
+		stack->stack_a = stack_a;
 	}
 }
 
-void	five(t_stack *t_stack)
+void	five(t_stack *stack)
 {
-	while (t_stack->len_b < 2)
+	while (stack->len_b < 2)
 	{
-		if (t_stack->stack_a->num == 0 || t_stack->stack_a->num == 1)
-			pb(t_stack);
+		if (stack->stack_a->num == 0 || stack->stack_a->num == 1)
+			pb(stack);
 		else
-			ra(t_stack);
+			ra(stack);
 	}
-	if (t_stack->stack_b->num < t_stack->stack_b->next->num)
-		sb(t_stack);
-	if (!sorted(t_stack->stack_a))
-		three(t_stack);
-	pa(t_stack);
-	pa(t_stack);
+	if (stack->stack_b->num < stack->stack_b->next->num)
+		sb(stack);
+	if (!sorted(stack->stack_a))
+		three(stack);
+	pa(stack);
+	pa(stack);
 }
