@@ -6,7 +6,7 @@
 #    By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/08 22:39:41 by albmarqu          #+#    #+#              #
-#    Updated: 2024/09/13 12:09:41 by albmarqu         ###   ########.fr        #
+#    Updated: 2024/09/28 16:13:22 by albmarqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC = 	so_long.c \
 		get_next_line_utils_bonus.c
 SRCS = $(addprefix src/, $(SRC))
 OBJS = $(SRCS:.c=.o)
-FLAGS = -Wall -Wextra -Werror -g -Ofast
+FLAGS = -Wall -Wextra -Werror -g -Ofast -fsanitize=address
 CC = clang
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:14 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 22:07:15 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:45:23 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool	sorted(t_nodes *stack);
 void	frees(t_stack *t_stack);
 void	main_check(t_stack *t_stack, int argc, char **argv);
 
-void	check_num_args(int argc);
+bool	check_num_args(int argc);
 bool	only_nums(char **args);
 bool	rep_nums(t_nodes *stack);
 

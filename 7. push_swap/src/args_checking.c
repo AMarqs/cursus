@@ -6,19 +6,17 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:57:07 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 19:45:25 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:45:07 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	check_num_args(int argc)
+bool	check_num_args(int argc)
 {
 	if (argc < 2)
-	{
-		write(2, "Error\n", 6);
-		exit(EXIT_FAILURE);
-	}
+		return (false);
+	return (true);
 }
 
 bool	only_nums(char **args)

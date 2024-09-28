@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:01:20 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 22:29:24 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:05:21 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,11 @@ void	frees(t_stack *t_stack)
 {
 	t_nodes	*aux;
 
-	if (t_stack->stack_b)
-	{
-		while (t_stack->stack_b)
-		{
-			aux = t_stack->stack_b->next;
-			free(t_stack->stack_b);
-			t_stack->stack_b = aux;
-		}
-	}
 	if (t_stack->stack_a)
 	{
 		while (t_stack->stack_a)
 		{
 			aux = t_stack->stack_a->next;
-			printf("a %p\n", t_stack->stack_a);
-			fflush(stdout);
 			free(t_stack->stack_a);
 			t_stack->stack_a = aux;
 		}
@@ -57,8 +46,7 @@ void	main_check(t_stack *t_stack, int argc, char **argv)
 		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
-	check_num_args(argc);
-	if (!args2array(argc, argv, t_stack) || !rep_nums(t_stack->stack_a))
+	if (!check_num_args(argc) || !args2array(argc, argv, t_stack) || !rep_nums(t_stack->stack_a))
 	{
 		write(2, "Error\n", 6);
 		frees(t_stack);
@@ -68,25 +56,32 @@ void	main_check(t_stack *t_stack, int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_stack	*t_stack;
+	t_stack	*stack;
 
-	t_stack = malloc(sizeof(t_stack));
-	main_check(t_stack, argc, argv);
-	normal(t_stack);
-	t_stack->len_a = t_stack->count;
-	if (t_stack->len_a == 1 || sorted(t_stack->stack_a))
+	if (argv[1][0] == 0)
 	{
-		frees(t_stack);
+		write(2, "Error2\n", 7);
 		exit(EXIT_SUCCESS);
 	}
-	t_stack->stack_b = NULL;
-	t_stack->len_b = 0;
-	if (t_stack->len_a == 2 || t_stack->len_a == 3)
-		three(t_stack);
-	else if (t_stack->len_a == 4 || t_stack->len_a == 5)
-		five(t_stack);
+		
+	stack = (t_stack *)malloc(sizeof(t_stack));
+	stack->count = 0;
+	main_check(stack, argc, argv);
+	normal(stack);
+	stack->len_a = stack->count;
+	if (stack->len_a == 1 || sorted(stack->stack_a))
+	{
+		frees(stack);
+		exit(EXIT_SUCCESS);
+	}
+	stack->stack_b = NULL;
+	stack->len_b = 0;
+	if (stack->len_a == 2 || stack->len_a == 3)
+		three(stack);
+	else if (stack->len_a == 4 || stack->len_a == 5)
+		five(stack);
 	else
-		cost_algorithm(t_stack);
-	frees(t_stack);
+		cost_algorithm(stack);
+	frees(stack);
 	return (0);
 }

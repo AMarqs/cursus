@@ -6,7 +6,7 @@
 /*   By: albmarqu <albmarqu@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:38:05 by albmarqu          #+#    #+#             */
-/*   Updated: 2024/09/27 22:18:47 by albmarqu         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:54:12 by albmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	**split_args(int argc, char **argv, t_stack *t_stack)
 		if (argv[1][0] == 0)
 		{
 			write(2, "Error\n", 6);
+			free(t_stack);
 			exit(EXIT_FAILURE);
 		}
 		arg_split = ft_split(argv[1], ' ');
