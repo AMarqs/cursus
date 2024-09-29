@@ -1,0 +1,10 @@
+main
+- main_check (main.c) -> comprueba que los argumentos sean correctos
+	- check_num_args (args_checking.c) ->  comrueba que haya más de un argumento y que si hay solo dos argumentos, el segundo no sea nulo
+	- args2array (create_stack.c) -> convierte el/los argumento/s de entrada en un args2array
+		- split_args (create_stack.c) -> en caso de que solo haya un argumento, lo divide con split_args
+		- only_nums (args_checking.c) -> comprueba que los argumentos sean solo números
+		- init_node (create_stack.c) -> inicia un nodo
+		- node_loop (create_stack.c) -> mete cada número del argumento como nodos en el stack
+	- rep_nums (args_checking.c) -> comprueba que no haya números repetidos
+- normal (normalize.c) -> normaliza todos los números del stack
