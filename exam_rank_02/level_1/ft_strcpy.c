@@ -29,11 +29,9 @@ char    *ft_strcpy(char *s1, char *s2)
 int main()
 {
 	char *src = "hola";
-	char *dest;
+	char dest[5];
 	ft_strcpy(dest, src);
 	int i = 0;
 	printf("%s", dest);
-	// while (dest[i] != '\0')
-	// 	write(1, &dest[i++], 1);
 	return (0);
 }

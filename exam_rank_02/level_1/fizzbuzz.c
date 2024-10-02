@@ -47,12 +47,19 @@ int main(void)
 				write(1, "fizz", 4);
 		else if (i % 5 == 0)
 				write(1, "buzz", 4);
-		else
+		else if (i < 10)
 		{
 			aux = i;
 			i += 48;
 			write(1, &i, 1);
 			i = aux;
+		}
+		else if (i >= 10 && i < 100)
+		{
+			aux = i / 10 + 48;
+			write(1, &aux, 1);
+			aux =  i % 10 + 48;
+			write(1, &aux, 1);
 		}
 		write(1, "\n", 1);
 		i++;

@@ -29,20 +29,16 @@
 
 int main(int argc, char **argv)
 {
+	int i = 0;
 	if (argc == 2)
 	{
-		char *str = argv[1];
-		int i = 0;
-		char aux;
-		while (str[i])
+		while (argv[1][i])
 		{
-			if ((str[i] >= 'A' && str[i] <= 'M') || (str[i] >= 'a' && str[i] <= 'm'))
-				aux = str[i] + 13;
-			else if ((str[i] >= 'N' && str[i] <= 'Z') || (str[i] >= 'n' && str[i] <= 'z'))
-				aux = str[i] - 13;
-			else
-				aux = str[i];
-			write(1, &aux, 1);
+			if ((argv[1][i] >= 'A' && argv[1][i] <= 'M') || (argv[1][i] >= 'a' && argv[1][i] <= 'm'))
+				argv[1][i] = argv[1][i] + 13;
+			else if ((argv[1][i] >= 'N' && argv[1][i] <= 'Z') || (argv[1][i] >= 'n' && argv[1][i] <= 'z'))
+				argv[1][i] = argv[1][i] - 13;
+			write(1, &argv[1][i], 1);
 			i++;
 		}
 	}
